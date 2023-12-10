@@ -36,8 +36,6 @@ def face_download(path_data: string, dict_face: dict):
             # Save the captured image into the datasets folder
             cv2.imwrite(path_data + "/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y + h, x:x + w])
 
-            cv2.imshow('image', img)
-
         k = cv2.waitKey(100) & 0xff  # Press 'ESC' for exiting video
         if k == 27:
             break

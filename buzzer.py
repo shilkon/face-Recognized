@@ -16,16 +16,3 @@ def Buzz(pitch, duraction):
 		time.sleep(delay)
 		GPIO.output(Buzzer, False)
 		time.sleep(delay)
-try:
-	while True:
-		print('Enter Pitch 200...2000')
-		Pitch = int(input())
-		print('Enter Duraction, seconds: ')
-		Duraction = int(input())
-		Buzz(Pitch, Duraction)
-except KeyboardInterrupt:
-	print('Exit pressed Ctrl+C')
-	GPIO.cleanup()
-finally:
-	GPIO.cleanup()
-	print('End')
