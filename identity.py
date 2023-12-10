@@ -23,8 +23,7 @@ def face_download(path_data: string, dict_face: dict):
     if not os.path.exists(path_data):
         os.makedirs(path_data)
 
-    while (True):
-
+    while True:
         ret, img = cam.read()
         img = cv2.flip(img, 1)  # flip video image vertically
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -86,7 +85,6 @@ def face_recognation(path_trainer, dict_face: dict) -> InfoRecognize:
 
     i = 0
     while True:
-
         ret, img = cam.read()
         img = cv2.flip(img, 1)  # Flip vertically
 
