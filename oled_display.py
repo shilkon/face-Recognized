@@ -33,15 +33,12 @@ class Display:
         self.__draw.text((128 - time_width, 0), time.strftime("%H:%M"), font=self.__header_font, fill=1)
         
     def wait(self):
-        self.__clear_header()
         self.__clear_body()
         self.__draw.text((5, 29), "Standby...", font=self.__body_font, fill=1)
         self.__show_image()
         
-    def success(self, acc: float):
-        self.__clear_header()
+    def success(self):
         self.__clear_body()
-        self.__draw.text((0, 0), f"Acc: {acc}%", font=self.__header_font, fill=1)
         self.__draw.text((5, 21), "Access", font=self.__body_font, fill=1)
         self.__draw.text((5, 39), "granted!", font=self.__body_font, fill=1)
         self.__image.paste(self.__success_image, (85, 23))
@@ -55,7 +52,6 @@ class Display:
         self.__show_image()
         
     def fail(self):
-        self.__clear_header()
         self.__clear_body()
         self.__draw.text((5, 21), "Access", font=self.__body_font, fill=1)
         self.__draw.text((5, 39), "denied!", font=self.__body_font, fill=1)
@@ -75,9 +71,6 @@ class Display:
     def __clear_body(self):
         self.__draw.rectangle((0, 16, 127, 63), fill=0)
         
-    def __clear_header(self):
-        self.__draw.rectangle((0, 0, 84, 14), fill=0)
-        
     def __show_image(self):
         self.update_time()
         self.__oled.image(self.__image)
@@ -87,7 +80,7 @@ class Display:
 if __name__ == "__main__":
     display = Display()
     time.sleep(5)
-    display.success(50)
+    display.success()
     time.sleep(5)
     display.welcome("Ilya")
     time.sleep(5)
