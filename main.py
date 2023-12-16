@@ -4,9 +4,10 @@ from buzzer import *
 from leds import *
 from oled_display import Display
 from time import sleep
+import cv2
 
 def main(display: Display):
-    result = face_recognation("trainer", name_person)
+    result = face_recognation("trainer", name_person, faceCascade)
 
     print(result.condition, ' ', result.name)
 
@@ -32,6 +33,10 @@ if __name__ == '__main__':
     leds_init()
     display = Display()
     buzzer_init()
+
+    # recognizer.read("trainer/trainer.yml")
+    cascadePath = "haarcascade_frontalface_default.xml"
+    faceCascade = cv2.CascadeClassifier(cascadePath)
 
     try:
         while True:
