@@ -66,11 +66,9 @@ def face_training(path_date, path_trainer):
     print("\n [INFO] {0} faces trained. Exiting Program".format(len(np.unique(ids))))
 
 
-def face_recognation(path_trainer, dict_face: dict) -> InfoRecognize:
+def face_recognation(path_trainer, dict_face: dict, faceCascade) -> InfoRecognize:
     recognizer = cv2.face.LBPHFaceRecognizer_create()
     recognizer.read(path_trainer + "/trainer.yml")
-    cascadePath = "haarcascade_frontalface_default.xml"
-    faceCascade = cv2.CascadeClassifier(cascadePath);
 
     # Initialize and start realtime video capture
     cam = cv2.VideoCapture(0)
@@ -103,19 +101,18 @@ def face_recognation(path_trainer, dict_face: dict) -> InfoRecognize:
 
             # Check if confidence is less them 100 ==> "0" is perfect match
             if (confidence < 100):
-                if 100 - confidence > 50:
-                    print("\n [INFO] Exiting Program: recognized person")
+                if 100 - confidence > 60:
+                    print("\n [INFO] Recognized person")
                     cam.release()
-                    cv2.destroyAllWindows()
                     return InfoRecognize(Condition.RECOGNIZED, dict_face[id])
 
-            print(confidence, '\n')
-        if (i >= 100):
-            print("\n [INFO] Exiting Program: unknown person")
-            cam.release()
-            cv2.destroyAllWindows()
-            return InfoRecognize(Condition.UNKNOWN, 'None')
-        i += 1
+            #print(confidence, '\n')
+            
+            i += 1
+            if (i >= 10):
+                print("\n [INFO] Unknown person")
+                cam.release()
+                return InfoRecognize(Condition.UNKNOWN, 'None')
 
 
 

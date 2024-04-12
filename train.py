@@ -3,8 +3,7 @@ from identity import *
 name_person = {
     1: 'Dany',
    2: 'Igor',
-   3: 'Sany',
-   4: 'Danila'
+   3: 'Sany'
 }
 
 def main():
